@@ -1,2 +1,5 @@
 gitaid
 gitaid.*
+
+build/
+*.exe

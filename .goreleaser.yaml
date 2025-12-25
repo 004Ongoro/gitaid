@@ -1,0 +1,37 @@
+version: 2
+project_name: gitaid
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos: [linux, windows, darwin]
+    goarch: [amd64, arm64]
+
+archives:
+  - format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+
+brews:
+  - name: gitaid
+    repository:
+      owner: 004Ongoro
+      name: homebrew-tap
+      token: "{{ .Env.GORELEASER_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/004Ongoro/gitaid"
+    description: "AI-powered git commit generator."
+
+scoops:
+  - name: gitaid
+    repository:
+      owner: 004Ongoro
+      name: scoop-bucket
+      token: "{{ .Env.GORELEASER_TOKEN }}"
+    homepage: "https://github.com/004Ongoro/gitaid"
+    description: "AI-powered git commit generator."
